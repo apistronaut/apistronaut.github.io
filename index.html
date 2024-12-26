@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Explore</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: url("warm.webp") center/cover no-repeat fixed;
+                font-family: Helvetica, sans-serif;
+                overflow: hidden;
+            }
+
+            .explore-text {
+                font-size: clamp(2rem, 10vw, 6rem);
+                color: rgba(255, 255, 255, 0);
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                animation: fadeIn 5s ease-out forwards;
+                animation-delay: 1s;
+                opacity: 0;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes fadeIn {
+                0% {
+                    opacity: 0;
+                    color: rgba(255, 255, 255, 0);
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0);
+                }
+                100% {
+                    opacity: 1;
+                    color: rgba(255, 255, 255, 1);
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                }
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                z-index: -1;
+            }
+
+            @media (max-width: 768px) {
+                .explore-text {
+                    padding: 0 1rem;
+                    text-align: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="overlay"></div>
+        <h1 class="explore-text">Explore</h1>
+    </body>
+</html>
