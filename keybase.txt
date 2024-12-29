@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/apistronaut
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://www.apistronaut.com
+  * I am apistronaut (https://keybase.io/apistronaut) on keybase.
+  * I have a public key ASCKNxxZWsA4nmklKBL7YVPuC5-YflUWqlK5meJTeitlWQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012022435a3cb857660e8ea2347be94d8213a55578ecf5441cc757183a8f1157992e0a",
+      "host": "keybase.io",
+      "kid": "01208a371c595ac0389e69252812fb6153ee0b9f987e5516aa52b999e2537a2b65590a",
+      "uid": "1581ac9952557bf4ee2d48b175123319",
+      "username": "apistronaut"
+    },
+    "merkle_root": {
+      "ctime": 1735458072,
+      "hash": "7bffe5a6a1556c7f823ebc8d922e33718137e0f69759c9b2d79aeda15b88fbc9b5b8ebd73e5f945d170afec9d29ab9aba826250543a2af2a33318a578dacd029",
+      "hash_meta": "081e59a2c996fd93beabb2576f45638cb035bf3cf8b336e8d2b8d4daec74279a",
+      "seqno": 26411299
+    },
+    "service": {
+      "entropy": "YojHjJEBkPz2htc0n/covkt2",
+      "hostname": "www.apistronaut.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.5.0"
+  },
+  "ctime": 1735458288,
+  "expire_in": 504576000,
+  "prev": "accde39003c869d64d89c819bb340ee6e0ebd0b36e993a020bb0815d3488790c",
+  "seqno": 17,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgijccWVrAOJ5pJSgS+2FT7gufmH5VFqpSuZniU3orZVkKp3BheWxvYWTESpcCEcQgrM3jkAPIadZNicgZuzQO5uDr0LNumToCC7CBXTSIeQzEIMdsl1BVtfkX7h2z11OJyxs1CSAhm4OsjRKhEINI0jyDAgHCo3NpZ8RAeL/43L2KgnMTjP2GsAesBYkRTJJnCY0EUE2cKBC3TdGOA0V8sSy/1zvETNHoXcsbEcTIN4zNkEFldH/spZgVD6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIAaZYR4/FOLkdIlJrUDTlCxFljZCgsRwPhnTWrNxHQ0Po3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/apistronaut
+
+==================================================================
