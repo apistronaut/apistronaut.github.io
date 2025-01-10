@@ -5,12 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Explore</title>
         <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
             body {
                 min-height: 100vh;
                 display: flex;
@@ -25,7 +19,7 @@
                 font-size: clamp(2rem, 10vw, 6rem);
                 color: rgba(255, 255, 255, 0);
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-                animation: fadeIn 5s ease-out forwards;
+                animation: fadeIn 4s ease-out forwards;
                 animation-delay: 1s;
                 opacity: 0;
                 animation-fill-mode: forwards;
@@ -54,16 +48,192 @@
                 z-index: -1;
             }
 
-            @media (max-width: 768px) {
-                .explore-text {
-                    padding: 0 1rem;
-                    text-align: center;
-                }
+            header {
+                position: relative; /* Keep it relative for dropdown positioning */
+                height: auto; /* Automatically adjusts height to content */
+                width: auto;
+                display: flex; /* Use flexbox for layout */
+                justify-content: flex-end; /* Align items to the right */
+                align-items: center; /* Vertically align items */
+                margin: 0; /* No external margins */
+                box-shadow: none; /* Ensure no shadow adds to the visual size */
+            }
+
+            .hamburger {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                cursor: pointer;
+                z-index: 100;
+                font-size: 36px;
+                background: none;
+                border: none;
+                padding: 0;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s ease;
+            }
+
+            .hamburger:hover {
+                transform: scale(1.3);
+            }
+            .hamburger.active {
+                transform: rotate(45deg);
+            }
+
+            .dynamic-container {
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                width: 250px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.5s ease,
+                    transform 0.5s ease;
+                transform: translateY(-20px);
+            }
+
+            .dynamic-container.active {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .dynamic-item {
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 30px;
+                padding: 12px 20px;
+                text-align: center;
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                transform: translateX(20px);
+                transition:
+                    opacity 0.8s ease,
+                    transform 0.8s ease,
+                    background 0.3s ease;
+            }
+
+            .dynamic-item:hover {
+                background: rgba(255, 255, 255, 1);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            .dynamic-item.active {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .dynamic-item a {
+                text-decoration: none;
+                color: #925bb4;
+                font-weight: 600;
+                font-size: 18px;
+                letter-spacing: 0.5px;
+                transition: color 0.3s ease;
+            }
+
+            .dynamic-item a:hover {
+                color: #6a5acd;
             }
         </style>
     </head>
+
     <body>
         <div class="overlay"></div>
         <h1 class="explore-text">Explore</h1>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+        <div class="dynamic-container" id="dynamic-container"></div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const hamburger = document.getElementById("hamburger");
+                const container = document.getElementById("dynamic-container");
+
+                const items = [
+                    { text: "Pages", link: "pages/pages.html" },
+                    { text: "Projects", link: "projects/projects.html" },
+                    { text: "About", link: "pages/about.html" },
+                ];
+
+                let isActive = false;
+                let animationTimeouts = [];
+
+                const clearAnimations = () => {
+                    animationTimeouts.forEach((timeout) =>
+                        clearTimeout(timeout),
+                    );
+                    animationTimeouts = [];
+                };
+
+                const clearItems = () => {
+                    clearAnimations();
+                    container.innerHTML = "";
+                };
+
+                hamburger.addEventListener("click", () => {
+                    clearAnimations();
+
+                    isActive = !isActive;
+                    hamburger.classList.toggle("active");
+
+                    if (isActive) {
+                        container.innerHTML = "";
+                        container.classList.add("active");
+
+                        items.forEach((item, index) => {
+                            const div = document.createElement("div");
+                            div.className = "dynamic-item";
+
+                            const link = document.createElement("a");
+                            link.href = item.link;
+                            link.textContent = item.text;
+
+                            div.appendChild(link);
+                            container.appendChild(div);
+
+                            const timeout = setTimeout(() => {
+                                div.classList.add("active");
+                            }, index * 250);
+
+                            animationTimeouts.push(timeout);
+                        });
+                    } else {
+                        const allItems = Array.from(
+                            container.querySelectorAll(".dynamic-item"),
+                        );
+
+                        if (allItems.length === 0) {
+                            container.classList.remove("active");
+                            return;
+                        }
+
+                        // Reverse the order for closing animation
+                        allItems.forEach((item, index) => {
+                            const reverseIndex = allItems.length - 1 - index;
+                            const timeout = setTimeout(() => {
+                                item.classList.remove("active");
+                            }, reverseIndex * 250);
+
+                            animationTimeouts.push(timeout);
+                        });
+
+                        const finalTimeout = setTimeout(
+                            () => {
+                                container.classList.remove("active");
+                                container.innerHTML = "";
+                            },
+                            allItems.length * 250 + 100,
+                        );
+
+                        animationTimeouts.push(finalTimeout);
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

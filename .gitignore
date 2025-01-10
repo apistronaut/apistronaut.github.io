@@ -1,2 +1,13 @@
 
 .DS_Store
+template.html
+sitevar.txt
+src
+node_modules
+.gitignore
+.gitattributes
+astro.config.mjs
+.astro
+package*
+sitevar.md
+tsconfig.json
