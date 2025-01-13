@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Files</title>
+        <style>
+            /* [Previous CSS remains exactly the same until the script section] */
+            :root {
+                --color-primary: #925bb4;
+                --color-secondary: #b3894f;
+                --color-white: #faf6f1;
+                --color-black: #2c2420;
+                --color-background: #f5e6d3;
+                --color-text: #4a3c32;
+                --max-width: 800px;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Helvetica, sans-serif;
+                line-height: 1.6;
+                background-color: var(--color-background);
+                color: var(--color-text);
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                padding: 0 15px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: var(--max-width);
+                margin: 0 auto;
+                padding: 20px 0;
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 0;
+                border-bottom: 2px solid var(--color-secondary);
+            }
+
+            .site-title {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: var(--color-primary);
+                letter-spacing: 1px;
+            }
+
+            .hamburger {
+                cursor: pointer;
+                font-size: 24px;
+                background: none;
+                border: none;
+                color: var(--color-black);
+                transition: transform 0.3s ease;
+            }
+
+            .hamburger:hover {
+                transform: scale(1.1);
+            }
+
+            .hamburger.active {
+                transform: rotate(45deg);
+            }
+
+            .side-menu {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 250px;
+                height: 100vh;
+                background-color: var(--color-white);
+                box-shadow: -4px 0 15px rgba(44, 36, 32, 0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                padding: 20px;
+            }
+
+            .side-menu.active {
+                right: 0;
+            }
+
+            .side-menu-content {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 50px;
+            }
+
+            .side-menu-item {
+                background-color: var(--color-background);
+                padding: 10px 15px;
+                border-radius: 8px;
+                text-decoration: none;
+                color: var(--color-primary);
+                font-weight: 600;
+                text-align: center;
+                transition: background-color 0.3s ease;
+            }
+
+            .side-menu-item:hover {
+                background-color: var(--color-primary);
+                color: var(--color-white);
+            }
+
+            .files-section {
+                background-color: var(--color-white);
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(44, 36, 32, 0.1);
+                margin-top: 20px;
+            }
+
+            .files-title {
+                font-size: 2rem;
+                color: var(--color-primary);
+                margin-bottom: 20px;
+                border-bottom: 2px solid var(--color-secondary);
+                padding-bottom: 10px;
+            }
+
+            .file-item {
+                background-color: var(--color-background);
+                padding: 15px 20px;
+                border-radius: 8px;
+                margin-bottom: 15px;
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+                opacity: 0;
+                transform: translateX(20px);
+                animation: slideIn 0.8s ease forwards;
+            }
+
+            @keyframes slideIn {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .file-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(44, 36, 32, 0.1);
+            }
+
+            .file-link {
+                text-decoration: none;
+                color: var(--color-primary);
+                font-weight: 600;
+                font-size: 1.1rem;
+                letter-spacing: 0.5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .file-meta {
+                font-size: 0.9rem;
+                color: var(--color-secondary);
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(44, 36, 32, 0.5);
+                display: none;
+                z-index: 999;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+
+            /* Animation delays */
+            .file-item:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+            .file-item:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            .file-item:nth-child(3) {
+                animation-delay: 0.3s;
+            }
+            .file-item:nth-child(4) {
+                animation-delay: 0.4s;
+            }
+            .file-item:nth-child(5) {
+                animation-delay: 0.5s;
+            }
+            .file-item:nth-child(6) {
+                animation-delay: 0.6s;
+            }
+            .file-item:nth-child(7) {
+                animation-delay: 0.7s;
+            }
+            .file-item:nth-child(8) {
+                animation-delay: 0.8s;
+            }
+            .file-item:nth-child(9) {
+                animation-delay: 0.9s;
+            }
+            .file-item:nth-child(10) {
+                animation-delay: 1s;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="overlay" id="overlay"></div>
+
+        <div class="container">
+            <div class="header">
+                <div class="site-title">Files</div>
+                <button class="hamburger" id="hamburger">&#9776;</button>
+            </div>
+
+            <div class="side-menu" id="side-menu">
+                <div class="side-menu-content">
+                    <a href="../index.html" class="side-menu-item">Home</a>
+                    <a href="automation.html" class="side-menu-item"
+                        >Automation</a
+                    >
+                    <a href="security.html" class="side-menu-item">Security</a>
+                    <a href="drones.html" class="side-menu-item">Drones</a>
+                    <a href="about.html" class="side-menu-item">About</a>
+                </div>
+            </div>
+
+            <div class="files-section">
+                <h1 class="files-title">Directory Contents</h1>
+                <div id="files-container">
+                    <div class="file-item">
+                        <a href="index.html" class="file-link">
+                            <span>index.html</span>
+                            <span class="file-meta">.html</span>
+                        </a>
+                    </div>
+                    <div class="file-item">
+                        <a href="automation.html" class="file-link">
+                            <span>automation.html</span>
+                            <span class="file-meta">.html</span>
+                        </a>
+                    </div>
+                    <div class="file-item">
+                        <a href="security.html" class="file-link">
+                            <span>security.html</span>
+                            <span class="file-meta">.html</span>
+                        </a>
+                    </div>
+                    <div class="file-item">
+                        <a href="drones.html" class="file-link">
+                            <span>drones.html</span>
+                            <span class="file-meta">.html</span>
+                        </a>
+                    </div>
+                    <div class="file-item">
+                        <a href="about.html" class="file-link">
+                            <span>about.html</span>
+                            <span class="file-meta">.html</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const hamburger = document.getElementById("hamburger");
+                const sideMenu = document.getElementById("side-menu");
+                const overlay = document.getElementById("overlay");
+
+                hamburger.addEventListener("click", () => {
+                    hamburger.classList.toggle("active");
+                    sideMenu.classList.toggle("active");
+                    overlay.classList.toggle("active");
+                });
+
+                overlay.addEventListener("click", () => {
+                    hamburger.classList.remove("active");
+                    sideMenu.classList.remove("active");
+                    overlay.classList.remove("active");
+                });
+            });
+        </script>
+    </body>
+</html>
